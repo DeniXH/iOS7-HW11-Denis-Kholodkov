@@ -92,6 +92,29 @@ class ViewController: UIViewController {
         return imagePasswordFieldLeft
     }()
 
+    private lazy var buttonLogin: UIButton = {
+        let buttonLogin = UIButton(type: .system)
+        buttonLogin.setTitle("Login", for: .normal)
+        buttonLogin.setTitleColor(.white, for: .normal)
+        buttonLogin.backgroundColor = UIColor(red: 105/255, green: 120/255, blue: 211/255, alpha: 100)
+        buttonLogin.layer.cornerRadius = 25
+        buttonLogin.layer.shadowColor = UIColor.black.cgColor
+        buttonLogin.layer.shadowOpacity = 0.3
+        buttonLogin.layer.shadowOffset = .zero
+        buttonLogin.layer.shouldRasterize = true
+        buttonLogin.layer.rasterizationScale = UIScreen.main.scale
+        buttonLogin.translatesAutoresizingMaskIntoConstraints = false
+        return buttonLogin
+    }()
+
+    private lazy var labelCenter: UILabel = {
+        let labelCenter = UILabel()
+        labelCenter.text = "Forgot your password"
+        labelCenter.font = UIFont.systemFont(ofSize: 25)
+        labelCenter.translatesAutoresizingMaskIntoConstraints = false
+        return labelCenter
+    }()
+
     override func viewDidLoad() {
         super.viewDidLoad()
         setupHierarchy()
@@ -111,7 +134,8 @@ class ViewController: UIViewController {
         stackForPasswordField.addArrangedSubview(imagePasswordFieldLeft)
         stackForPasswordField.addArrangedSubview(passwordField)
 
-
+        view.addSubview(buttonLogin)
+        view.addSubview(labelCenter)
 
 
     }
@@ -145,6 +169,16 @@ class ViewController: UIViewController {
 
         stackForPasswordField.snp.makeConstraints { make in
             make.top.equalTo(stackForLoginField.snp.bottom).offset(15)
+            make.centerX.equalTo(view)
+        }
+
+        buttonLogin.snp.makeConstraints { make in
+            make.top.equalTo(stackForPasswordField.snp.bottom).offset(40)
+            make.centerX.equalTo(view)
+        }
+
+        labelCenter.snp.makeConstraints { make in
+            make.top.equalTo(buttonLogin.snp.bottom).offset(15)
             make.centerX.equalTo(view)
         }
 }
