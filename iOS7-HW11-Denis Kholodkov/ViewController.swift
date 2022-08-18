@@ -35,6 +35,63 @@ class ViewController: UIViewController {
         return loginField
     }()
 
+    private lazy var passwordField: UITextField = {
+        let passwordField = UITextField()
+        passwordField.textColor = .white
+        passwordField.placeholder = "Password"
+        passwordField.backgroundColor = .systemGreen
+        passwordField.font = UIFont.systemFont(ofSize: 20)
+        passwordField.translatesAutoresizingMaskIntoConstraints = false
+        return passwordField
+    }()
+
+    private lazy var stackForLoginField: UIStackView = { // сделать функцию
+        let stackForLoginField = UIStackView()
+        stackForLoginField.axis = .horizontal
+        stackForLoginField.distribution = .fill
+        stackForLoginField.alignment = .center
+        stackForLoginField.spacing = 20
+        stackForLoginField.translatesAutoresizingMaskIntoConstraints = false
+        return stackForLoginField
+    }()
+
+    private lazy var stackForPasswordField: UIStackView = { // сделать функцию
+        let stackForPasswordField = UIStackView()
+        stackForPasswordField.axis = .horizontal
+        stackForPasswordField.distribution = .fill
+        stackForPasswordField.alignment = .center
+        stackForPasswordField.spacing = 20
+        stackForPasswordField.translatesAutoresizingMaskIntoConstraints = false
+        return stackForPasswordField
+    }()
+
+    private lazy var imageLoginFieldLeft: UIImageView = {
+        let image = UIImage(systemName: "person")
+        let imageLoginFieldLeft = UIImageView(image: image)
+        imageLoginFieldLeft.contentMode = .scaleAspectFill
+        imageLoginFieldLeft.tintColor = .black
+        imageLoginFieldLeft.translatesAutoresizingMaskIntoConstraints = false
+        return imageLoginFieldLeft
+    }()
+
+    private lazy var imageLoginFieldRight: UIImageView = {
+        let image = UIImage(systemName: "checkmark.circle.fill")
+        let imageLoginFieldRight = UIImageView(image: image)
+        imageLoginFieldRight.contentMode = .scaleAspectFill
+        imageLoginFieldRight.tintColor = .black
+        imageLoginFieldRight.translatesAutoresizingMaskIntoConstraints = false
+        return imageLoginFieldRight
+    }()
+
+    private lazy var imagePasswordFieldLeft: UIImageView = {
+        let image = UIImage(systemName: "lock")
+        let imagePasswordFieldLeft = UIImageView(image: image)
+        imagePasswordFieldLeft.contentMode = .scaleAspectFill
+        imagePasswordFieldLeft.tintColor = .black
+        imagePasswordFieldLeft.translatesAutoresizingMaskIntoConstraints = false
+        return imagePasswordFieldLeft
+    }()
+
     override func viewDidLoad() {
         super.viewDidLoad()
         setupHierarchy()
@@ -44,7 +101,19 @@ class ViewController: UIViewController {
     private func setupHierarchy() {
         view.addSubview(backgroundView)
         view.addSubview(labelHead)
-        view.addSubview(loginField)
+
+        view.addSubview(stackForLoginField)
+        stackForLoginField.addArrangedSubview(imageLoginFieldLeft)
+        stackForLoginField.addArrangedSubview(loginField)
+        stackForLoginField.addArrangedSubview(imageLoginFieldRight)
+
+        view.addSubview(stackForPasswordField)
+        stackForPasswordField.addArrangedSubview(imagePasswordFieldLeft)
+        stackForPasswordField.addArrangedSubview(passwordField)
+
+
+
+
     }
 
     private func setConstraints() {
@@ -59,6 +128,23 @@ class ViewController: UIViewController {
 
         loginField.snp.makeConstraints { make in
             make.top.equalTo(labelHead.snp.bottom).offset(40)
+            make.centerX.equalTo(view)
+        }
+
+        imageLoginFieldLeft.snp.makeConstraints { make in
+            make.width.height.equalTo(15)
+        }
+
+        imageLoginFieldRight.snp.makeConstraints { make in
+            make.width.height.equalTo(15)
+        }
+
+        imagePasswordFieldLeft.snp.makeConstraints { make in
+            make.width.height.equalTo(15)
+        }
+
+        stackForPasswordField.snp.makeConstraints { make in
+            make.top.equalTo(stackForLoginField.snp.bottom).offset(15)
             make.centerX.equalTo(view)
         }
 }
