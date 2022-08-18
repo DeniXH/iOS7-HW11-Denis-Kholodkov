@@ -6,14 +6,31 @@
 //
 
 import UIKit
+import SnapKit
 
 class ViewController: UIViewController {
 
+    private let backgroundView: UIImageView = {
+            let imageViewBackground = UIImageView(frame: UIScreen.main.bounds)
+            imageViewBackground.image = UIImage(named: "beach")
+            imageViewBackground.translatesAutoresizingMaskIntoConstraints = false
+            return imageViewBackground
+        }()
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
+        setupHierarchy()
+        setConstraints()
     }
 
+    private func setupHierarchy() {
+        view.addSubview(backgroundView)
+    }
 
+    private func setConstraints() {
+        backgroundView.snp.makeConstraints{ make in
+            make.bottom.top.right.left.equalToSuperview()
+        }
+    }
 }
 
