@@ -17,6 +17,24 @@ class ViewController: UIViewController {
             return imageViewBackground
         }()
 
+    private lazy var labelHead: UILabel = {
+        let labelHead = UILabel()
+        labelHead.text = "Login"
+        labelHead.font = UIFont.systemFont(ofSize: 42)
+        labelHead.translatesAutoresizingMaskIntoConstraints = false
+        return labelHead
+    }()
+
+    private lazy var loginField: UITextField = {
+        let loginField = UITextField()
+        loginField.textColor = .white
+        loginField.placeholder = "keanureeves01"
+        loginField.backgroundColor = .systemGreen
+        loginField.font = UIFont.systemFont(ofSize: 20)
+        loginField.translatesAutoresizingMaskIntoConstraints = false
+        return loginField
+    }()
+
     override func viewDidLoad() {
         super.viewDidLoad()
         setupHierarchy()
@@ -25,12 +43,24 @@ class ViewController: UIViewController {
 
     private func setupHierarchy() {
         view.addSubview(backgroundView)
+        view.addSubview(labelHead)
+        view.addSubview(loginField)
     }
 
     private func setConstraints() {
-        backgroundView.snp.makeConstraints{ make in
+        backgroundView.snp.makeConstraints { make in
             make.bottom.top.right.left.equalToSuperview()
         }
-    }
+
+        labelHead.snp.makeConstraints { make in
+            make.top.equalTo(view.safeAreaLayoutGuide.snp.top).offset(70)
+            make.centerX.equalTo(view)
+        }
+
+        loginField.snp.makeConstraints { make in
+            make.top.equalTo(labelHead.snp.bottom).offset(40)
+            make.centerX.equalTo(view)
+        }
 }
 
+}
